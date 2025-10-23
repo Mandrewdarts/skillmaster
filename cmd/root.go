@@ -35,4 +35,5 @@ func init() {
 	rootCmd.AddCommand(installCmd)
 	rootCmd.AddCommand(listCmd)
 	rootCmd.AddCommand(searchCmd)
+	rootCmd.AddCommand(configCmd)
 }
