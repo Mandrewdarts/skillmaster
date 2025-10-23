@@ -24,12 +24,24 @@ const (
 )
 
 // GetConfigPath returns the path to the global config file
+// It first checks the current directory for .skillmaster/config.json
+// and falls back to the home directory if not found
 func GetConfigPath() (string, error) {
+	// First, check current directory
+	cwd, err := os.Getwd()
+	if err == nil {
+		localConfigPath := filepath.Join(cwd, ConfigDirName, ConfigFileName)
+		if _, err := os.Stat(localConfigPath); err == nil {
+			return localConfigPath, nil
+		}
+	}
+
+	// Fall back to home directory
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
 		return "", fmt.Errorf("failed to get home directory: %w", err)
 	}
-	
+
 	configDir := filepath.Join(homeDir, ConfigDirName)
 	return filepath.Join(configDir, ConfigFileName), nil
 }

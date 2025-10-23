@@ -37,3 +37,4 @@ tmp/
 # SkillMaster installation directory
 .ai/
 skillmaster.json
+.skillmaster
